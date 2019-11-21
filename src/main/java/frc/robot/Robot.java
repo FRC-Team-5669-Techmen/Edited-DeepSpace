@@ -36,6 +36,7 @@ public class Robot extends TimedRobot {
   TalonSRX frontLeftMotor = new TalonSRX(1);
   Joystick jStick = new Joystick(0);
   Joystick bStick = new Joystick(2);
+  double speedAddition = 1.0;
   
 
   /**
@@ -104,10 +105,10 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     //SIDE TO SIDE
     //while(jStick.getRawAxis(4) == 1){
-      backRightMotor.set(ControlMode.PercentOutput, ((jStick.getRawAxis(4) / 3) * -0.75) + ((jStick.getRawAxis(1) / 3) * -0.7) + ((jStick.getRawAxis(0) / 3) * -0.7) );      //^  V    RFB
-      backLeftMotor.set(ControlMode.PercentOutput, ((jStick.getRawAxis(4) / 3) * 0.6) + ((jStick.getRawAxis(1) / 3) * -0.6) +((jStick.getRawAxis(0) / 3) * 0.6) );        //V  ^   RBF
-      frontRightMotor.set(ControlMode.PercentOutput, ((jStick.getRawAxis(4) / 3) * 0.6) + ((jStick.getRawAxis(1) / 3) * 0.6) +  ((jStick.getRawAxis(0) / 3) * -0.6) );
-      frontLeftMotor.set(ControlMode.PercentOutput, ((jStick.getRawAxis(4) / 3) * 0.6) + ((jStick.getRawAxis(1) / 3) * -0.6) + ((jStick.getRawAxis(0) / 3) * -0.6) );
+      backRightMotor.set(ControlMode.PercentOutput, (((jStick.getRawAxis(4) / 3) * -0.75) + ((jStick.getRawAxis(1) / 3) * -0.7) + ((jStick.getRawAxis(0) / 3) * 0.7)) * speedAddition );      //^  V    RFB
+      backLeftMotor.set(ControlMode.PercentOutput, (((jStick.getRawAxis(4) / 3) * 0.6) + ((jStick.getRawAxis(1) / 3) * -0.6) +((jStick.getRawAxis(0) / 3) * -0.6)) * speedAddition );        //V  ^   RBF
+      frontRightMotor.set(ControlMode.PercentOutput, (((jStick.getRawAxis(4) / 3) * 0.6) + ((jStick.getRawAxis(1) / 3) * 0.6) +  ((jStick.getRawAxis(0) / 3) * 0.6))* speedAddition );
+      frontLeftMotor.set(ControlMode.PercentOutput, (((jStick.getRawAxis(4) / 3) * 0.6) + ((jStick.getRawAxis(1) / 3) * -0.6) + ((jStick.getRawAxis(0) / 3) * 0.6)) * speedAddition );
     //}
     
 
@@ -135,6 +136,15 @@ public class Robot extends TimedRobot {
     if(bStick.getRawButtonPressed(3)){
       liftMotor.set(ControlMode.PercentOutput, 0 );
     }
+    if(bStick.getRawButtonPressed(5)){
+      wristMotor.set(ControlMode.PercentOutput, 0.5);
+    }
+    if(bStick.getRawButtonPressed(6)){
+      wristMotor.set(ControlMode.PercentOutput, -0.5);
+    }
+    if(bStick.getRawButtonPressed(7)){
+      wristMotor.set(ControlMode.PercentOutput, 0 );
+    }
   }
   
 
@@ -145,3 +155,7 @@ public class Robot extends TimedRobot {
   public void testPeriodic() {
   }
 }
+
+
+// pneumatics
+// team358.org/

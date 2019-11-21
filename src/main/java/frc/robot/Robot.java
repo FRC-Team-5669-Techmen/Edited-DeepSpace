@@ -104,10 +104,10 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     //SIDE TO SIDE
     //while(jStick.getRawAxis(4) == 1){
-      backRightMotor.set(ControlMode.PercentOutput, ((jStick.getRawAxis(4) / 2) * -0.5) + ((jStick.getRawAxis(1) / 2) * -0.45) );      //^  V    RFB
-      backLeftMotor.set(ControlMode.PercentOutput, ((jStick.getRawAxis(4) / 2) * 0.4) + ((jStick.getRawAxis(1) / 2) * -0.4));        //V  ^   RBF
-      frontRightMotor.set(ControlMode.PercentOutput, ((jStick.getRawAxis(4) / 2) * 0.4) + ((jStick.getRawAxis(1) / 2) * 0.4) );
-      frontLeftMotor.set(ControlMode.PercentOutput, ((jStick.getRawAxis(4) / 2) * 0.4) + ((jStick.getRawAxis(1) / 2) * -0.4));
+      backRightMotor.set(ControlMode.PercentOutput, ((jStick.getRawAxis(4) / 3) * -0.75) + ((jStick.getRawAxis(1) / 3) * -0.7) + ((jStick.getRawAxis(0) / 3) * -0.7) );      //^  V    RFB
+      backLeftMotor.set(ControlMode.PercentOutput, ((jStick.getRawAxis(4) / 3) * 0.6) + ((jStick.getRawAxis(1) / 3) * -0.6) +((jStick.getRawAxis(0) / 3) * 0.6) );        //V  ^   RBF
+      frontRightMotor.set(ControlMode.PercentOutput, ((jStick.getRawAxis(4) / 3) * 0.6) + ((jStick.getRawAxis(1) / 3) * 0.6) +  ((jStick.getRawAxis(0) / 3) * -0.6) );
+      frontLeftMotor.set(ControlMode.PercentOutput, ((jStick.getRawAxis(4) / 3) * 0.6) + ((jStick.getRawAxis(1) / 3) * -0.6) + ((jStick.getRawAxis(0) / 3) * -0.6) );
     //}
     
 

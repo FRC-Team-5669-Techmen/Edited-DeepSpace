@@ -10,8 +10,11 @@ package frc.robot;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -34,10 +37,14 @@ public class Robot extends TimedRobot {
   TalonSRX backLeftMotor = new TalonSRX(8);
   TalonSRX frontRightMotor = new TalonSRX(6);
   TalonSRX frontLeftMotor = new TalonSRX(1);
+  TalonSRX wheelOfDeathjpg = new TalonSRX(2);
+  TalonSRX wheelOfDeath2jpg = new TalonSRX(7);
   Joystick jStick = new Joystick(0);
   Joystick bStick = new Joystick(2);
   double speedAddition = 1.0;
-  
+  DoubleSolenoid solenoid = new DoubleSolenoid(2, 3);
+  boolean solenoidState = false;
+
 
   /**
    * This function is run when the robot is first started up and should be
@@ -111,6 +118,16 @@ public class Robot extends TimedRobot {
       frontLeftMotor.set(ControlMode.PercentOutput, (((jStick.getRawAxis(4) / 3) * 0.6) + ((jStick.getRawAxis(1) / 3) * -0.6) + ((jStick.getRawAxis(0) / 3) * 0.6)) * speedAddition );
     //}
     
+    
+    if (bStick.getRawButtonPressed(9)) {
+      solenoidState = !solenoidState;
+      if (solenoidState){
+        solenoid.set(Value.kForward);
+      }
+      else {
+        solenoid.set(Value.kReverse);
+      }
+    }
 
     /*  test code after open house
     while(bStick.getRawButtonPressed(1)) {
@@ -127,24 +144,31 @@ public class Robot extends TimedRobot {
 
     */
 
-    if(bStick.getRawButtonPressed(1)){
+    if(bStick.getRawButton(1)){
       liftMotor.set(ControlMode.PercentOutput, 0.5 );
-    }
-    if(bStick.getRawButtonPressed(2)){
+    }else if(bStick.getRawButton(2)){
       liftMotor.set(ControlMode.PercentOutput, -0.5 );
-    }
-    if(bStick.getRawButtonPressed(3)){
+    }else {
       liftMotor.set(ControlMode.PercentOutput, 0 );
     }
-    if(bStick.getRawButtonPressed(5)){
-      wristMotor.set(ControlMode.PercentOutput, 0.5);
-    }
-    if(bStick.getRawButtonPressed(6)){
-      wristMotor.set(ControlMode.PercentOutput, -0.5);
-    }
-    if(bStick.getRawButtonPressed(7)){
+    if(bStick.getRawButton(5)){
+      wristMotor.set(ControlMode.PercentOutput, 0.5 );
+    }else if(bStick.getRawButton(6)){
+      wristMotor.set(ControlMode.PercentOutput, -0.5 );
+    }else {
       wristMotor.set(ControlMode.PercentOutput, 0 );
     }
+    if(bStick.getRawButton(3)){
+      wheelOfDeathjpg.set(ControlMode.PercentOutput, 0.70 );
+      wheelOfDeath2jpg.set(ControlMode.PercentOutput, -0.70 );
+    }else if(bStick.getRawButton(7)){
+      wheelOfDeathjpg.set(ControlMode.PercentOutput, -0.70 );
+      wheelOfDeath2jpg.set(ControlMode.PercentOutput, 0.70 );
+    }else{
+      wheelOfDeathjpg.set(ControlMode.PercentOutput, 0 );
+      wheelOfDeath2jpg.set(ControlMode.PercentOutput, 0 );
+    }
+    System.out.println(bStick.getRawButton(10));
   }
   
 

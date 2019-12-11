@@ -168,7 +168,19 @@ public class Robot extends TimedRobot {
       wheelOfDeathjpg.set(ControlMode.PercentOutput, 0 );
       wheelOfDeath2jpg.set(ControlMode.PercentOutput, 0 );
     }
-    System.out.println(bStick.getRawButton(10));
+    if(bStick.getRawButton(11) && bStick.getRawButton(10)){
+      System.out.println("11 and 10");
+      speedAddition = 4;
+    }else if(bStick.getRawButton(11)){
+      System.out.println("11");
+      speedAddition = 3;
+    }else if(bStick.getRawButton(10)){
+      System.out.println("10");
+      speedAddition = 2;
+    }else{
+      System.out.println("not 10 or 11");
+      speedAddition = 1;
+    }
   }
   
 

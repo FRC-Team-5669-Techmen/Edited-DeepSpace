@@ -39,10 +39,9 @@ public class Robot extends TimedRobot {
   TalonSRX frontLeftMotor = new TalonSRX(1);
   TalonSRX wheelOfDeathjpg = new TalonSRX(2);
   TalonSRX wheelOfDeath2jpg = new TalonSRX(7);
-  Joystick jStick = new Joystick(1);
-  Joystick bStick = new Joystick(0);
-  double speedAddition = 3.0;
-  double liftAddition = 3.0;
+  Joystick jStick = new Joystick(0);
+  Joystick bStick = new Joystick(2);
+  double speedAddition = 1.0;
   DoubleSolenoid solenoid = new DoubleSolenoid(2, 3);
   boolean solenoidState = false;
 
@@ -146,9 +145,9 @@ public class Robot extends TimedRobot {
     */
 
     if(bStick.getRawButton(1)){
-      liftMotor.set(ControlMode.PercentOutput, 0.5  * liftAddition);
+      liftMotor.set(ControlMode.PercentOutput, 0.5 );
     }else if(bStick.getRawButton(2)){
-      liftMotor.set(ControlMode.PercentOutput, -0.5  * liftAddition);
+      liftMotor.set(ControlMode.PercentOutput, -0.5 );
     }else {
       liftMotor.set(ControlMode.PercentOutput, 0 );
     }
@@ -169,19 +168,7 @@ public class Robot extends TimedRobot {
       wheelOfDeathjpg.set(ControlMode.PercentOutput, 0 );
       wheelOfDeath2jpg.set(ControlMode.PercentOutput, 0 );
     }
-    if(bStick.getRawButton(11) && bStick.getRawButton(10)){
-      System.out.println("11 and 10");
-      speedAddition = 4;
-    }else if(bStick.getRawButton(11)){
-      System.out.println("11");
-      speedAddition = 3;
-    }else if(bStick.getRawButton(10)){
-      System.out.println("10");
-      speedAddition = 2;
-    }else{
-      System.out.println("not 10 or 11");
-      speedAddition = 1;
-    }
+    System.out.println(bStick.getRawButton(10));
   }
   
 
